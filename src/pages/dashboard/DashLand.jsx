@@ -4,7 +4,6 @@ import { AuthContext } from '../../provider/AuthContext';
 const DashLand = () => {
     const [myPosts, setMyPosts] = useState([]);
     const { user } = useContext(AuthContext);
-
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -50,9 +49,12 @@ const DashLand = () => {
                 </div>
 
                 <div className="bg-white dark:bg-base-200 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
-                    <h3 className="text-sm">Total Views</h3>
-                    <p className="text-3xl font-bold text-primary mt-1">{myPosts.length * 42}</p>
-                    <p className="text-xs mt-1">Based on all your posts</p>
+                    <h3 className="text-sm">Last SignIn Date</h3>
+                    <p className="text-md mt-1">
+                        {user?.metadata?.lastSignInTime
+                            ? new Date(user.metadata.lastSignInTime).toLocaleDateString()
+                            : "N/A"}
+                    </p>
                 </div>
 
                 <div className="bg-white dark:bg-base-200 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
